@@ -11,12 +11,16 @@
     <p>Welcome to the chat app</p>
 
     <ul ng-repeat="messageText in messageThread"> 
-        <li>{{$index}}. {{messageText.from}} : {{messageText.text}}</li>
+
+        <li ng-if="!messageText.url">{{$index+1}}. {{messageText.from}} : {{messageText.text}}</li>
+        <li ng-if="messageText.url">{{$index+1}}. {{messageText.from}} <a ng-href="{{messageText.url}}">My Current Location</a></li>
     </ul>
     <form>
         <input type="text" ng-model="message" name="message" placeholder="Enter Message"autocomplete="off" >
         <button ng-click="sendMessage(message)" ng-disabled="!message">Send</button>
-    </form>   
+    </form>
+    <button ng-click="sendLocation()">Send Location</button>
+   
 
     </div>
     <script src="/socket.io/socket.io.js"></script>
