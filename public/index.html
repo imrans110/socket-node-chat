@@ -4,24 +4,30 @@
 
 <head>
     <meta charset="utf-8">
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body ng-app="SocketChat">
-    <div ng-controller="SocketChatController">
-    <p>Welcome to the chat app</p>
-
-    <ul ng-repeat="messageText in messageThread"> 
-
-        <li ng-if="!messageText.url">{{$index+1}}. {{messageText.from}} : {{messageText.text}}</li>
-        <li ng-if="messageText.url">{{$index+1}}. {{messageText.from}} <a ng-href="{{messageText.url}}">My Current Location</a></li>
-    </ul>
-    <form>
-        <input type="text" ng-model="message" name="message" placeholder="Enter Message"autocomplete="off" >
-        <button ng-click="sendMessage(message)" ng-disabled="!message">Send</button>
-    </form>
-    <button ng-click="sendLocation()">Send Location</button>
-   
-
+    <div class="chat" ng-controller="SocketChatController">
+        <div class="chat__sidebar">
+            <h3>Chat Participants</h3>
+            <div id='users'></div>
+        </div>
+        <div class="chat__main">
+            <ul class="chat__messages" ng-repeat="messageText in messageThread">
+                <li ng-if="!messageText.url">{{$index+1}}. {{messageText.from}} : {{messageText.text}}</li>
+                <li ng-if="messageText.url">{{$index+1}}. {{messageText.from}} 
+                    <a ng-href="{{messageText.url}}">My Current Location</a>
+                </li>
+            </ul>
+            <div class="chat__footer">
+                <form>
+                    <input type="text" ng-model="message" name="message" placeholder="Enter Message" autocomplete="off">
+                    <button ng-click="sendMessage(message)" ng-disabled="!message">Send</button>
+                </form>
+                <button ng-click="sendLocation()">Send Location</button>
+            </div>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.11/angular.min.js"></script>
