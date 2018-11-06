@@ -12,7 +12,7 @@ This is an extension of Andrew Mead's Tutorial which uses jQuery for frontend. O
 * Send Image.
 * Send File.
 
-## Current Stack :-
+## Current Stack 
 * Node.js
 * Socket.io
 * AngularJS
